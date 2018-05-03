@@ -60,6 +60,26 @@ define([
 
   });
   
+  command.on("session:copy-file-path", async function() {
+    var tab = sessions.getCurrent();
+    if (tab == null) {
+      return;
+    }
+    
+    function copyTextToClipboard(str) {
+      document.oncopy = function(event) {
+        event.clipboardData.setData('text/plain', str);
+        event.preventDefault();
+        document.oncopy = null;
+      };
+      document.execCommand("Copy", false, null);
+    }
+    
+    copyTextToClipboard(tab.path);
+  });
+  
+
+  
   command.on("session:save-file-as", async function() {
     var tab = sessions.getCurrent();
     await tab.save(true);

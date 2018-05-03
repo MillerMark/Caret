@@ -6,6 +6,7 @@
   "Ctrl-O": "session:open-file",
   "Ctrl-W": "session:close-tab",
   "Ctrl-S": "session:save-file",
+  "Ctrl-Alt-Shift-N": "session:copy-file-path",
   "Ctrl-Shift-S": "session:save-file-as",
   "Ctrl-Alt-S": "session:save-all",
   "Ctrl-N": "session:new-file",

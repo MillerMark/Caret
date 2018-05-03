@@ -16,7 +16,7 @@ define([
   };
   
   File.prototype = {
-    open: async function(mode) {
+    open: async function(mode, defaultName) {
       var self = this;
       //mode is "open" or "save"
       var modes = {
@@ -24,7 +24,7 @@ define([
         "save": "saveFile"
       };
       
-      var entry = await chromeP.fileSystem.chooseEntry({ type: modes[mode] });
+      var entry = await chromeP.fileSystem.chooseEntry({ type: modes[mode], suggestedName: defaultName });
       //cancelling acts like an error, but isn't.
       if (!entry) throw chrome.runtime.lastError;
       this.entry = entry;

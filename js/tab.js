@@ -74,7 +74,10 @@ define([
     if (!this.file || as) {
       var file = new File();
       try {
-        await file.open("save");
+        var defaultName = null;
+        if (as)
+          defaultName = this.path;
+        await file.open("save", defaultName);
       } catch(err) {
         if (err.message != "User cancelled") {
           dialog(err.message);
@@ -102,7 +105,7 @@ define([
     var data = await chromeP.storage.local.get("retained");
     if (!data.retained) return;
     var filtered = data.retained.filter(item => item != id);
-    chrome.storage.local.set({ retained: filtered });  
+    chrome.storage.local.set({ retained: filtered });
   };
   
   Tab.prototype.render = function(index) {
